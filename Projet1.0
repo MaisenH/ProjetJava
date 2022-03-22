@@ -3,6 +3,7 @@ import java.lang.Thread;
 import java.util.Random;
 
 public class JeuDeLaVie {
+	private static final String Java = null;
 	String [][] tab;
 	int nb_tours;
 	int delai;
@@ -30,25 +31,80 @@ public class JeuDeLaVie {
 		 }
 	}
 	
-	public JeuDeLaVie(String viv,String mor) {
+	public JeuDeLaVie(String viv,String mor, int k) {
 		vivant=viv;
 		mort=mor;
 		tab = new String[100][100];
-		 for (int i = 0;i < tab.length; i++) {
-	         for (int j = 0;j < tab[i].length;j++) {
-	        	 int min_val = 10;
-	             int max_val = 100;
-	             Random ran = new Random();
-	             int x = ran.nextInt(max_val) + min_val;
-	             	if(x%2==0) {
-	             		tab[i][j] = viv;
-	             	}
-	             	else {
-	             		tab[i][j] = mort;
-	             	}
-	         }
-		 }
-	}
+		if(k==1) {
+			 for (int i = 0;i < tab.length; i++) {
+		         for (int j = 0;j < tab[i].length;j++) {
+		        	 int min_val = 10;
+		             int max_val = 100;
+		             Random ran = new Random();
+		             int x = ran.nextInt(max_val) + min_val;
+		             	if(x%2==0) {
+		             		tab[i][j] = vivant;
+		             	}
+		             	else {
+		             		tab[i][j] = mort;
+		             	}
+		         }
+			 }
+		}
+		if(k==2) {
+			for (int i = 0;i < tab.length; i++) {
+		         for (int j = 0;j < tab[i].length;j++) {
+		        	 	if(j>i) {
+		             		tab[i][j] = vivant;
+		        	 	}else {
+		        	 		tab[i][j] = mort;
+		        	 	}
+		         }
+			}
+		}
+		if(k==3) {
+			for (int i = 0;i < tab.length; i++) {
+		         for (int j = 0;j < tab[i].length;j++) {
+		        	 	tab[i][j]=mort;
+		        	 	}
+		         }
+			tab[49][49]=vivant;
+			tab[49][50]=vivant;
+			tab[50][49]=vivant;
+			tab[51][49]=vivant;
+		}
+		if(k==4) {
+			for (int i = 0;i < tab.length; i++) {
+		         for (int j = 0;j < tab[i].length;j++) {
+		        	 int h=i+j;
+		        	 if(h%2==0) {
+		        	 	tab[i][j]=vivant;
+		        	 }
+		        	 else {
+		        		 tab[i][j]=mort;
+		        	 }
+		         }
+			}
+		}
+		if(k==5) {
+			for (int i = 0;i < tab.length; i++) {
+		         for (int j = 0;j < tab[i].length;j++) {
+		        	 int h=i+j;
+		        	 	if(i<20 || i>80) {
+			        	 if(h%2==0) {
+			        	 	tab[i][j]=vivant;
+			        	 }
+			        	 else {
+			        		 tab[i][j]=mort;
+			        	 }
+		        	 	}else {
+		        	 		tab[i][j]=mort;
+		        	 	}
+		         	}
+				}
+			}
+		}
+	
 	
 	//Affiche le tableau
 	public void affichTab() {
@@ -109,34 +165,40 @@ public class JeuDeLaVie {
 	public String resultat(int i, int j) {
 		if( total_voisins(i,j)>=3) {
 			return vivant;
-		}else {
-			return mort;
 		}
+		return mort;
 	}
-	public void tour() {
+	public String[][] tour() {
+		String[][] tabb=new String[100][100];
 		for (int i = 0;i < tab.length; i++) {
 	         for (int j = 0;j < tab[i].length;j++) {
-	        		 tab[i][j] = resultat(i,j);
+	        		 tabb[i][j] = resultat(i,j);
 	      }
 		}
+		return tabb;
 	}
 	public void run(int nb_tours,int delai){
 		for(int i=0;i<nb_tours;i++) {
-			String [][] tabi=tab;
-				tour();
-				try {
-					Thread.sleep(delai);
-				} catch (InterruptedException e) {
+			String [][] tabi=new String[100][00];
+			tabi=tab;
+			
+			tab=tour();
+			affichTab();
+			try {
+				Thread.sleep(delai);
+			} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				affichTab();
-				//Arrêt lorsqu'aucun changement n'est détecté.
-				if(tabi==tab) {
-					break;
-				}
+				e.printStackTrace();
 			}
+			
+			//Arrêt lorsqu'aucun changement n'est détecté.
+			if(tabi==tab) {
+				break;
+			}
+		}
+		System.out.println("Fin");
 	}
 	
 }
+
 
