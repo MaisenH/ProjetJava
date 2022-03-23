@@ -2,6 +2,10 @@ public class Pendemie {
     int [][] tab;
     //Le constructeur monde infini
     public Population() {
+        boolean vaccine;
+        boolean contamine;
+        // mettre un coefficient dans le cas du port du masque ou nom //boolean masque;
+        // mettre un coefficient à la prise ou nom de chlorochine et autre médicament // boolean traitement 
         /*Scanner sc = new Scanner(System.in);
         int lenghti = sc.nextInt();
         Scanner sc = new Scanner(System.in);
@@ -54,7 +58,7 @@ public class Pendemie {
     public int valeur_case(int i, int j) {
         return tab[i][j];
     }
-
+// mise en place du monde infinie //
     public int total_voisins(int i,int j) {
         int somme=0;
 
@@ -83,10 +87,10 @@ public class Pendemie {
         }
         //Pour chaque cas de j
         else if(j==0 && i!=0 && i!=tab.length-1) {//Le long de la première colonne
-            somme=tab[i-1][j]+tab[i-1][j+1]+tab[i][j+1]+tab[i+1][j+1]+tab[i+1][j];+tab[i][0]
+            somme=tab[i-1][j]+tab[i-1][j+1]+tab[i][j+1]+tab[i+1][j+1]+tab[i+1][j]+tab[i-1][tab.length]+tab[i][tab.length]+tab[i+1][tab.length];
         }
         else if(j==tab.length-1 && i!=0 && i!=tab.length-1) {//Le long de la dernière colonne
-            somme=tab[i-1][j-1]+tab[i-1][j]+tab[i+1][j]+tab[i+1][j-1]+tab[i][j-1];
+            somme=tab[i-1][j-1]+tab[i-1][j]+tab[i+1][j]+tab[i+1][j-1]+tab[i][j-1]+tab[i-1][j]+tab[i][j]+tab[i+1][j];
         }
         else {//Le corps de la matrice
             somme=tab[i-1][j-1]+tab[i-1][j]+tab[i-1][j+1]+tab[i][j+1]+tab[i+1][j+1]+tab[i+1][j]+tab[i+1][j-1]+tab[i][j-1];
