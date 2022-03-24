@@ -206,8 +206,7 @@ public class JeuDeLaVie {
 		
 	public void run(int nb_tours,int delai){
 		for(int i=0;i<nb_tours;i++) {
-			String [][] tabi=new String[100][00];
-			tabi=tab;
+			int bb=getNbmorts();
 			
 			tab=tour();
 			affichTab();
@@ -224,7 +223,7 @@ public class JeuDeLaVie {
 				e.printStackTrace();
 			}
 			//Arrêt lorsqu'aucun changement n'est détecté.
-			if(tabi==tab) {
+			if(b==bb || b==0) {
 				break;
 			}
 		}
@@ -232,6 +231,7 @@ public class JeuDeLaVie {
 	}
 	
 }
+
 
 
 
