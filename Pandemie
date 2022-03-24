@@ -68,6 +68,11 @@ public class Pandemie {
 			System.out.println(i.getVaccine()+""+i.getContamine());
 		}
 	}
+	
+	//Retourne la liste
+	public ArrayList<Individu> getListe(){
+		return liste;
+	}
 		
 	//Retourne la valeur
 	public int valeur_case(int i, int j) {
@@ -119,13 +124,15 @@ public class Pandemie {
 	public String resultat(int i, int j) {
 		int k=i+j;
 		Individu i5=liste.get(k);
-		if( total_voisins(i,j)>=3 && i5.getVaccine()==true) {
+		if( total_voisins(i,j)>=3 && i5.getVaccine()==true &&i5.getContamine()==false) {
 			Individu i6=new Individu(true,true);
 			liste.set(k,i6);
 			return Contamine;
-		}else if( total_voisins(i,j)>=3 && i5.getVaccine()==false) {
-			Individu i6=new Individu(false,true);
-			liste.set(k,i6);
+		}else if( total_voisins(i,j)>=3 && i5.getVaccine()==false && i5.getContamine()==false) {
+			Individu i7=new Individu(false,true);
+			liste.set(k,i7);
+			return Contamine;
+		}else if(i5.getContamine()==true) {
 			return Contamine;
 		}
 		return NonContamine;
@@ -193,6 +200,7 @@ public class Pandemie {
 		
 	public void run(int nb_tours,int delai){
 		for(int i=0;i<nb_tours;i++) {
+			int cc=getContamines();
 			
 			tab=tour();
 			affichTab();
@@ -215,8 +223,9 @@ public class Pandemie {
 					// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			tab=tour();
 			//Arrêt lorsqu'aucun changement n'est détecté.
-			if(a==c) {
+			if(cc==c || c==0) {
 				break;
 			}
 		}
@@ -224,4 +233,5 @@ public class Pandemie {
 	}
 	
 }
+
 
