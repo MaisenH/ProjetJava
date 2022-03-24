@@ -1,0 +1,20 @@
+package JDL;
+
+public class Individu {
+	Boolean vaccine;
+	Boolean contamine;
+	
+	
+	public Individu(Boolean vac,Boolean con) {
+		vaccine=vac;
+		contamine=con;
+	}
+	
+	public Boolean getVaccine() {
+		return vaccine;
+	}
+	
+	public Boolean getContamine() {
+		return contamine;
+	}
+}
