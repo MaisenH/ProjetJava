@@ -12,42 +12,48 @@ public class Pandemie {
 	String NonContamine;
 	
 	//Le constructeur
-	public Pandemie(String cont, String noncont) {
+	public Pandemie(String cont, String noncont, int v) {
 		Contamine=cont;
 		NonContamine=noncont;
 		Boolean TRUE=true;
 		Boolean FALSE=false;
 		liste=new ArrayList<Individu>();
 		tab = new String[100][100];
-		 for (int i = 0;i < tab.length; i++) {
-	         for (int j = 0;j < tab[i].length;j++) {
-	        	 int k=i+j;
-	        	 int min_val = 10;
-	             int max_val = 100;
-	             Random ran = new Random();
-	             int x = ran.nextInt(max_val) + min_val;
-	             	if(x%2==0) {
-	             		tab[i][j] = Contamine;
-	             		if(x%4==0) {
-	             			Individu i1=new Individu(TRUE,TRUE);
-	             			liste.add(k,i1);
-	             		}else {
-	             			Individu i2=new Individu(FALSE,TRUE);
-	             			liste.add(k,i2);
-	             		}
-	             	}
-	             	else {
-	             		tab[i][j] = NonContamine;
-	             		if(x%3==0) {
-	             			Individu i4=new Individu(TRUE,FALSE);
-	             			liste.add(k,i4);
-	             		}else {
-	             			Individu i3=new Individu(FALSE,FALSE);
-	             			liste.add(k,i3);
-	             		}
-	             	}
-	         }
-		 }
+		if(v==1) {
+			int nb=0;
+			for (int i = 0;i < tab.length; i++) {
+		         for (int j = 0;j < tab[i].length;j++) {
+		        	 int k=i+j;
+		        	 int min_val = 10;
+		             int max_val = 100;
+		             Random ran = new Random();
+		             int x = ran.nextInt(max_val) + min_val;
+		             	if(x%2==0 && nb<=10) {
+		             		tab[i][j] = Contamine;
+		             		if(x%4==0) {
+		             			Individu i1=new Individu(TRUE,TRUE);
+		             			liste.add(k,i1);
+		             		}else{
+		             			Individu i2=new Individu(FALSE,TRUE);
+		             			liste.add(k,i2);
+		             		}
+		             		nb++;
+		             	}
+		             	else {
+		             		tab[i][j] = NonContamine;
+		             		if(x%3==0) {
+		             			Individu i4=new Individu(TRUE,FALSE);
+		             			liste.add(k,i4);
+		             		}else {
+		             			Individu i3=new Individu(FALSE,FALSE);
+		             			liste.add(k,i3);
+		             		}
+		             	}
+		         }
+		}
+		
+       }
+       
 	}
 	
 	
@@ -171,83 +177,80 @@ public class Pandemie {
 		return sommee;
 	}
 	
-	public String resultat(int i, int j) {
-		int k=i+j;
-		Individu i5=liste.get(k);
-		int h=total_voisins_vaccines(i,j);
-		int g=total_voisins(i,j);
-		if(h>0) {
-			for(int m=0;m<h;m++) {
-				if(i5.getVaccine()==true &&i5.getContamine()==false) {
-					 int min_val = 1;
-		             int max_val = 16;
-		             Random ran = new Random();
-		             int x = ran.nextInt(max_val) + min_val;
-		             
-		             if(x==1) {
-		            	Individu i6=new Individu(true,true);
-		     			liste.set(k,i6);
-		     			return Contamine;
-		             }else {
-		            	 return NonContamine;
-		             }
-				}else if(i5.getVaccine()==false &&i5.getContamine()==false){
-					 int min_val = 1;
-		             int max_val = 8;
-		             Random ran = new Random();
-		             int x = ran.nextInt(max_val) + min_val;
-		             
-		             if(x==1) {
-		            	Individu i6=new Individu(false,true);
-		     			liste.set(k,i6);
-		     			return Contamine;
-		             }else {
-		            	 return NonContamine;
-		             }
-				}else if(i5.getContamine()==true) {
-					return Contamine;
-				}
-			}
-		}else {
-			for(int m=0;m<g;m++) {
-				if(i5.getVaccine()==true &&i5.getContamine()==false) {
-					 int min_val = 1;
-		             int max_val = 8;
-		             Random ran = new Random();
-		             int x = ran.nextInt(max_val) + min_val;
-		             
-		             if(x==1) {
-		            	Individu i6=new Individu(true,true);
-		     			liste.set(k,i6);
-		     			return Contamine;
-		             }else {
-		            	 return NonContamine;
-		             }
-				}else if(i5.getVaccine()==false &&i5.getContamine()==false) {
-					 int min_val = 1;
-		             int max_val = 4;
-		             Random ran = new Random();
-		             int x = ran.nextInt(max_val) + min_val;
-		             
-		             if(x==1) {
-		            	Individu i6=new Individu(false,true);
-		     			liste.set(k,i6);
-		     			return Contamine;
-		             }else {
-		            	 return NonContamine;
-		             }
-				}else if(i5.getContamine()==true) {
-					return Contamine;
-				}
-			}
+	public String aleatoire(int min_val, int max_val, int chiffre, int tour) {
+		if(tour==0) {
+			return NonContamine;
+		}
+		for(int i=0;i<tour;i++) {
+			Random ran = new Random();
+	        int x = ran.nextInt(max_val) + min_val;
+	        if(x==chiffre) {
+	        	return Contamine;
+	        }
 		}
 		return NonContamine;
 	}
+	public String resultat(int i, int j) {
+		int k=i+j;
+		Individu i10=liste.get(k);
+		
+		int a=total_voisins_vaccines(i,j);
+		int b=total_voisins(i,j);
+		int c=b-a;
+		
+		if(a>0) {
+			if(i10.getVaccine()==true && i10.getContamine()==false) {
+				if(aleatoire(1,16,1,a)=="1") {
+					Individu i6=new Individu(true,true);
+	     			liste.set(k,i6);
+					return Contamine;
+				}
+			}else if(i10.getVaccine()==false &&i10.getContamine()==false){
+				String xx=aleatoire(1,8,1,a);
+	             
+	             if(xx=="1") {
+	            	Individu i6=new Individu(false,true);
+	     			liste.set(k,i6);
+	     			return Contamine;
+	     			
+	        }else if(i10.getContamine()==true) {
+	        	return Contamine;
+	        }else {
+	        	return NonContamine;
+	        }
+		}
+		}if(c>0){
+				if(i10.getVaccine()==true &&i10.getContamine()==false) {
+					String xxx=aleatoire(1,8,1,c);
+		             
+		             if(xxx=="1") {
+		            	Individu i6=new Individu(true,true);
+		     			liste.set(k,i6);
+		     			return Contamine;
+		             }
+				}else if(i10.getVaccine()==false &&i10.getContamine()==false) {
+					String xxxx=aleatoire(1,4,1,c);
+		             
+		             if(xxxx=="1") {
+		            	Individu i6=new Individu(false,true);
+		     			liste.set(k,i6);
+		     			return Contamine;
+		             }
+				}else if(i10.getContamine()==true) {
+					return Contamine;
+				}else {
+					return NonContamine;
+				}
+			}
+		return NonContamine;
+	}
+	
+	
 	public String[][] tour() {
 		String[][] tabb=new String[100][100];
-		for (int i = 0;i < tab.length; i++) {
-	         for (int j = 0;j < tab[i].length;j++) {
-	        		 tabb[i][j] = resultat(i,j);
+		for (int i = 0;i < tabb.length; i++) {
+	         for (int j = 0;j < tabb[i].length;j++) {
+	        	 	tabb[i][j] = resultat(i,j);;
 	      }
 		}
 		return tabb;
@@ -279,7 +282,6 @@ public class Pandemie {
 		}
 		return compt;
 	}
-	
 		
 	//Get Vaccinés et contaminés
 	public int getVaccinesCont() {
@@ -329,7 +331,6 @@ public class Pandemie {
 					// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			tab=tour();
 			//Arrêt lorsqu'aucun changement n'est détecté.
 			if(cc==c || c==0) {
 				break;
