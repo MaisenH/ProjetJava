@@ -12,44 +12,48 @@ public class Pandemie {
 	String NonContamine;
 	
 	//Le constructeur
-	public Pandemie(String cont, String noncont, int v) {
-		Contamine=cont;
+	public Pandemie(String cont, String noncont, int v) {//v représente les différents états initiaux
+		Contamine=cont; //Permet à l'utilisateur de choisir le symbole des contaminés et des non contaminés
 		NonContamine=noncont;
 		Boolean TRUE=true;
 		Boolean FALSE=false;
-		liste=new ArrayList<Individu>();
+		liste=new ArrayList<Individu>(); //L'objet individu contient deux états : contaminé et vacciné (True ou False)
 		tab = new String[100][100];
-		if(v==1) {
+		
+		
+		if(v==1) {//Premier état initial préenregistré
 			int nb=0;
-			for (int i = 0;i < tab.length; i++) {
-		         for (int j = 0;j < tab[i].length;j++) {
-		        	 int k=i+j;
-		        	 int min_val = 10;
-		             int max_val = 100;
-		             Random ran = new Random();
-		             int x = ran.nextInt(max_val) + min_val;
-		             	if(x%2==0 && nb<=10) {
-		             		tab[i][j] = Contamine;
-		             		if(x%4==0) {
-		             			Individu i1=new Individu(TRUE,TRUE);
-		             			liste.add(k,i1);
-		             		}else{
-		             			Individu i2=new Individu(FALSE,TRUE);
-		             			liste.add(k,i2);
-		             		}
-		             		nb++;
-		             	}
-		             	else {
-		             		tab[i][j] = NonContamine;
-		             		if(x%3==0) {
-		             			Individu i4=new Individu(TRUE,FALSE);
-		             			liste.add(k,i4);
-		             		}else {
-		             			Individu i3=new Individu(FALSE,FALSE);
-		             			liste.add(k,i3);
-		             		}
-		             	}
+			int m=0;
+			for (int i = 0;i < tab.length; i++) { //parcourt les lignes
+		         for (int j = 0;j < tab[i].length;j++) { //parcours les colonnes
+			        	 int k=i+j+m; // L'indice des éléments du tableau dans l'ArrayList Individu
+			        	 int min_val = 10;
+			             int max_val = 100;
+			             Random ran = new Random(); 
+			             int x = ran.nextInt(max_val) + min_val;//Retourne une valeur aléatoire entre 10 et 100
+			             	if(x%2==0 && nb<=100) {
+			             		tab[i][j] = Contamine;
+			             		if(x%4==0) {
+			             			Individu i1=new Individu(TRUE,TRUE); //Certains des contaminés seront vaccinés
+			             			liste.add(k,i1);
+			             		}else{
+			             			Individu i2=new Individu(FALSE,TRUE);// D'autres ne seront pas vaccinés
+			             			liste.add(k,i2);
+			             		}
+			             		nb++;
+			             	}
+			             	else {//On fait pareil pour initialiser les non contaminés
+			             		tab[i][j] = NonContamine;
+			             		if(x%3==0) {
+			             			Individu i4=new Individu(TRUE,FALSE); //Certains des non contaminés seront vaccinés
+			             			liste.add(k,i4);
+			             		}else {
+			             			Individu i3=new Individu(FALSE,FALSE); //D'autres non vaccinés
+			             			liste.add(k,i3);
+			             		}
+			             	}
 		         }
+		         m+=99;
 		}
 		
        }
@@ -71,16 +75,16 @@ public class Pandemie {
 	//Afficher liste
 	public void afficheliste() {
 		for(Individu i : liste) {
-			System.out.println(i.getVaccine()+""+i.getContamine());
+			System.out.println(i.getVaccine()+" "+i.getContamine());
 		}
 	}
 	
-	//Retourne la liste
+	//Récupère la liste
 	public ArrayList<Individu> getListe(){
 		return liste;
 	}
 		
-	//Retourne la valeur
+	//Retourne la valeur de contamination d'une case
 	public int valeur_case(int i, int j) {
 		if(tab[i][j]==Contamine) {
 			return 1;
@@ -95,10 +99,10 @@ public class Pandemie {
 		//Pour tous les cas de i
 		if(i==0){
 			if(j==0) {//En haut à gauche
-				somme=valeur_case(i,j+1)+valeur_case(i+1,j+1)+valeur_case(i+1,j)+valeur_case(i,n-1)+valeur_case(i+1,n-1)+valeur_case(n-1,j)+valeur_case(n-1,j+1);
+				somme=valeur_case(i,j+1)+valeur_case(i+1,j+1)+valeur_case(i+1,j)+valeur_case(i,n-1)+valeur_case(i+1,n-1)+valeur_case(n-1,j)+valeur_case(n-1,j+1)+valeur_case(n-1,n-1);
 			}
 			else if(j==tab.length-1) {//En haut à droite
-				somme=valeur_case(i,j-1)+valeur_case(i+1,j-1)+valeur_case(i+1,j)+valeur_case(i,0)+valeur_case(i+1,0)+valeur_case(n-1,j-1)+valeur_case(n-1,j);
+				somme=valeur_case(i,j-1)+valeur_case(i+1,j-1)+valeur_case(i+1,j)+valeur_case(i,0)+valeur_case(i+1,0)+valeur_case(n-1,j-1)+valeur_case(n-1,j)+valeur_case(n-1,0);
 			}
 			else {//Le long de la première ligne
 				somme=valeur_case(i,j+1)+valeur_case(i+1,j+1)+valeur_case(i+1,j)+valeur_case(i,j-1)+valeur_case(i+1,j-1)+valeur_case(n-1,j-1)+valeur_case(n-1,j)+valeur_case(n-1,j+1);
@@ -106,10 +110,10 @@ public class Pandemie {
 		}
 		else if(i==tab.length-1) {
 			if(j==0) {//En bas à gauche
-				somme=valeur_case(i-1,j)+valeur_case(i,j+1)+valeur_case(i-1,j+1)+valeur_case(i,n-1)+valeur_case(i-1,n-1)+valeur_case(0,j)+valeur_case(0,j+1);
+				somme=valeur_case(i-1,j)+valeur_case(i,j+1)+valeur_case(i-1,j+1)+valeur_case(i,n-1)+valeur_case(i-1,n-1)+valeur_case(0,j)+valeur_case(0,j+1)+valeur_case(0,n-1);
 			}
 			else if(j==tab.length-1) {//En bas à droite
-				somme=valeur_case(i-1,j-1)+valeur_case(i-1,j)+valeur_case(i,j-1)+valeur_case(i,0)+valeur_case(i-1,0)+valeur_case(0,j)+valeur_case(0,j-1);
+				somme=valeur_case(i-1,j-1)+valeur_case(i-1,j)+valeur_case(i,j-1)+valeur_case(i,0)+valeur_case(i-1,0)+valeur_case(0,j)+valeur_case(0,j-1)+valeur_case(0,0);
 			}
 			else {//Le long de la dernière ligne
 				somme=valeur_case(i,j-1)+valeur_case(i-1,j-1)+valeur_case(i-1,j)+valeur_case(i-1,j+1)+valeur_case(i,j+1)+valeur_case(0,j-1)+valeur_case(0,j)+valeur_case(0,j+1);
@@ -128,8 +132,11 @@ public class Pandemie {
 		return somme;
 	}
 	
+	//Renvoie l'état de vaccination d'un individu (1 si vacciné, 0 sinon)
 	public int valeur_vaccines(int i,int j) {
-		int k=i+j;
+		int n=(tab.length-1);
+		int m=n*i;
+		int k=i+j+m; //Permet d'avoir l'indice précis d'un élement dans l'ArrayList
 		Individu i6=liste.get(k);
 		if(i6.getVaccine()==true) {
 			return 1;
@@ -144,10 +151,10 @@ public class Pandemie {
 		//Pour tous les cas de i
 		if(i==0){
 			if(j==0) {//En haut à gauche
-				sommee=valeur_vaccines(i,j+1)+valeur_vaccines(i+1,j+1)+valeur_vaccines(i+1,j)+valeur_vaccines(i,n-1)+valeur_vaccines(i+1,n-1)+valeur_vaccines(n-1,j)+valeur_vaccines(n-1,j+1);
+				sommee=valeur_vaccines(i,j+1)+valeur_vaccines(i+1,j+1)+valeur_vaccines(i+1,j)+valeur_vaccines(i,n-1)+valeur_vaccines(i+1,n-1)+valeur_vaccines(n-1,j)+valeur_vaccines(n-1,j+1)+valeur_vaccines(n-1,n-1);
 			}
 			else if(j==tab.length-1) {//En haut à droite
-				sommee=valeur_vaccines(i,j-1)+valeur_vaccines(i+1,j-1)+valeur_vaccines(i+1,j)+valeur_vaccines(i,0)+valeur_vaccines(i+1,0)+valeur_vaccines(n-1,j-1)+valeur_vaccines(n-1,j);
+				sommee=valeur_vaccines(i,j-1)+valeur_vaccines(i+1,j-1)+valeur_vaccines(i+1,j)+valeur_vaccines(i,0)+valeur_vaccines(i+1,0)+valeur_vaccines(n-1,j-1)+valeur_vaccines(n-1,j)+valeur_vaccines(n-1,0);;
 			}
 			else {//Le long de la première ligne
 				sommee=valeur_vaccines(i,j+1)+valeur_vaccines(i+1,j+1)+valeur_vaccines(i+1,j)+valeur_vaccines(i,j-1)+valeur_vaccines(i+1,j-1)+valeur_vaccines(n-1,j-1)+valeur_vaccines(n-1,j)+valeur_vaccines(n-1,j+1);
@@ -155,10 +162,10 @@ public class Pandemie {
 		}
 		else if(i==tab.length-1) {
 			if(j==0) {//En bas à gauche
-				sommee=valeur_vaccines(i-1,j)+valeur_vaccines(i,j+1)+valeur_vaccines(i-1,j+1)+valeur_vaccines(i,n-1)+valeur_vaccines(i-1,n-1)+valeur_vaccines(0,j)+valeur_vaccines(0,j+1);
+				sommee=valeur_vaccines(i-1,j)+valeur_vaccines(i,j+1)+valeur_vaccines(i-1,j+1)+valeur_vaccines(i,n-1)+valeur_vaccines(i-1,n-1)+valeur_vaccines(0,j)+valeur_vaccines(0,j+1)+valeur_vaccines(0,n-1);
 			}
 			else if(j==tab.length-1) {//En bas à droite
-				sommee=valeur_vaccines(i-1,j-1)+valeur_vaccines(i-1,j)+valeur_vaccines(i,j-1)+valeur_vaccines(i,0)+valeur_vaccines(i-1,0)+valeur_vaccines(0,j)+valeur_vaccines(0,j-1);
+				sommee=valeur_vaccines(i-1,j-1)+valeur_vaccines(i-1,j)+valeur_vaccines(i,j-1)+valeur_vaccines(i,0)+valeur_vaccines(i-1,0)+valeur_vaccines(0,j)+valeur_vaccines(0,j-1)+valeur_vaccines(0,0);;
 			}
 			else {//Le long de la dernière ligne
 				sommee=valeur_vaccines(i,j-1)+valeur_vaccines(i-1,j-1)+valeur_vaccines(i-1,j)+valeur_vaccines(i-1,j+1)+valeur_vaccines(i,j+1)+valeur_vaccines(0,j-1)+valeur_vaccines(0,j)+valeur_vaccines(0,j+1);
@@ -177,21 +184,28 @@ public class Pandemie {
 		return sommee;
 	}
 	
-	public String aleatoire(int min_val, int max_val, int chiffre, int tour) {
+	//Cette méthode prend en entrée une val minimal (nominateur), une val maximale (dénominateur) de la probabilité qu'un individu soit contaminé. On lance la méthode pour un nombre de tour défini, et retourne Contamine si x=1
+	public String aleatoire(int min_val, int max_val, int tour) {
 		if(tour==0) {
 			return NonContamine;
 		}
 		for(int i=0;i<tour;i++) {
 			Random ran = new Random();
-	        int x = ran.nextInt(max_val) + min_val;
-	        if(x==chiffre) {
+	        int x = ran.nextInt(max_val) + min_val; //x a une chance sur 16 d'être égale à 1
+	        if(x==1) {
 	        	return Contamine;
 	        }
 		}
 		return NonContamine;
 	}
 	public String resultat(int i, int j) {
-		int k=i+j;
+		int m=0;
+		if(i>0) {
+			for(int l=0;l<m;l++) {
+				m+=99;
+			}
+		}
+		int k=i+j+m;
 		Individu i10=liste.get(k);
 		
 		int a=total_voisins_vaccines(i,j);
@@ -200,13 +214,13 @@ public class Pandemie {
 		
 		if(a>0) {
 			if(i10.getVaccine()==true && i10.getContamine()==false) {
-				if(aleatoire(1,16,1,a)=="1") {
+				if(aleatoire(1,16,a)=="1") {
 					Individu i6=new Individu(true,true);
 	     			liste.set(k,i6);
 					return Contamine;
 				}
 			}else if(i10.getVaccine()==false &&i10.getContamine()==false){
-				String xx=aleatoire(1,8,1,a);
+				String xx=aleatoire(1,8,a);
 	             
 	             if(xx=="1") {
 	            	Individu i6=new Individu(false,true);
@@ -221,7 +235,7 @@ public class Pandemie {
 		}
 		}if(c>0){
 				if(i10.getVaccine()==true &&i10.getContamine()==false) {
-					String xxx=aleatoire(1,8,1,c);
+					String xxx=aleatoire(1,8,c);
 		             
 		             if(xxx=="1") {
 		            	Individu i6=new Individu(true,true);
@@ -229,7 +243,7 @@ public class Pandemie {
 		     			return Contamine;
 		             }
 				}else if(i10.getVaccine()==false &&i10.getContamine()==false) {
-					String xxxx=aleatoire(1,4,1,c);
+					String xxxx=aleatoire(1,4,c);
 		             
 		             if(xxxx=="1") {
 		            	Individu i6=new Individu(false,true);
