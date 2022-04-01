@@ -1,0 +1,38 @@
+package JDL;
+
+import java.util.ArrayList;
+import java.util.Random;
+
+public class main {
+	public static void main(String[] arg) {
+		//JeuDeLaVie jeuDeLaVie = new JeuDeLaVie("1","0",9);
+		//jeuDeLaVie.affichTab();
+		//int t =jeuDeLaVie.total_voisins(99,2);
+		//System.out.println("le nombre de voisins est "+t);
+		//String a=jeuDeLaVie.resultat(99, 2);
+		//System.out.println("la nouvelle case vaut "+a);
+		//jeuDeLaVie.tour();
+		//jeuDeLaVie.affichTab();
+		//jeuDeLaVie.run(10,2000);
+		Pandemie pan=new Pandemie("1","0",1);
+		//pan.afficheliste();
+		
+		//System.out.println(pan.getListe().get(4).getContamine());
+		//pan.affichTab();
+		pan.run(10, 2000);
+		//int t=pan.getVaccines();
+		//System.out.println(t);
+		//pan.getNonVaccinesCont();
+		//pan.getVaccines();
+		//pan.getPopulation();
+		//ArrayList<Individu> listee=new ArrayList<Individu>();
+		//listee.addAll(pan.getListe());
+		//for(Individu i : pan.getListe()) {
+			//System.out.println(i.getVaccine()+""+i.getContamine());
+		//}
+		//System.out.println();
+		//System.out.println(pan.getListe().get(0).getVaccine()+""+pan.getListe().get(0).getContamine());
+		//System.out.println(pan.resultat(0, 0));
+		//System.out.println(pan.getListe().get(0).getVaccine()+""+pan.getListe().get(0).getContamine());
+	}
+}
