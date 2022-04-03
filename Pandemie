@@ -21,8 +21,7 @@ public class Pandemie {
 		tab = new String[100][100];
 		
 		
-		if(v==1) {//Premier état initial préenregistré
-			int nb=0;
+		if(v==1) {//Premier état initial préenregistré avec 2000 contaminés et 1000 vaccinés
 			int m=0;
 			for (int i = 0;i < tab.length; i++) { //parcourt les lignes
 		         for (int j = 0;j < tab[i].length;j++) { //parcours les colonnes
@@ -31,22 +30,21 @@ public class Pandemie {
 			             int max_val = 100;
 			             Random ran = new Random(); 
 			             int x = ran.nextInt(max_val) + min_val;//Retourne une valeur aléatoire entre 10 et 100
-			             	if(x%2==0 && nb<=100) {
+			             	if(x%2==0 && getContamines()<=2000) {
 			             		tab[i][j] = Contamine;
-			             		if(x%4==0) {
-			             			Individu i1=new Individu(TRUE,TRUE); //Certains des contaminés seront vaccinés
-			             			liste.add(k,i1);
+			             		if(x%4==0 && getVaccines()<1000) {
+				             			Individu i1=new Individu(TRUE,TRUE); //Certains des contaminés seront vaccinés
+				             			liste.add(k,i1);
 			             		}else{
 			             			Individu i2=new Individu(FALSE,TRUE);// D'autres ne seront pas vaccinés
 			             			liste.add(k,i2);
 			             		}
-			             		nb++;
 			             	}
 			             	else {//On fait pareil pour initialiser les non contaminés
 			             		tab[i][j] = NonContamine;
-			             		if(x%3==0) {
-			             			Individu i4=new Individu(TRUE,FALSE); //Certains des non contaminés seront vaccinés
-			             			liste.add(k,i4);
+			             		if(x%3==0 && getVaccines()<1000) {
+				             			Individu i4=new Individu(TRUE,FALSE); //Certains des non contaminés seront vaccinés
+				             			liste.add(k,i4);
 			             		}else {
 			             			Individu i3=new Individu(FALSE,FALSE); //D'autres non vaccinés
 			             			liste.add(k,i3);
@@ -58,6 +56,75 @@ public class Pandemie {
 		
        }
        
+		if(v==2) {//Premier état initial préenregistré avec 2000 contaminés et 2000 vaccinés
+			int m=0;
+			for (int i = 0;i < tab.length; i++) { //parcourt les lignes
+		         for (int j = 0;j < tab[i].length;j++) { //parcours les colonnes
+			        	 int k=i+j+m; // L'indice des éléments du tableau dans l'ArrayList Individu
+			        	 int min_val = 10;
+			             int max_val = 100;
+			             Random ran = new Random(); 
+			             int x = ran.nextInt(max_val) + min_val;//Retourne une valeur aléatoire entre 10 et 100
+			             	if(x%2==0 && getContamines()<=2000) {
+			             		tab[i][j] = Contamine;
+			             		if(x%4==0 && getVaccines()<2000) {
+				             			Individu i1=new Individu(TRUE,TRUE); //Certains des contaminés seront vaccinés
+				             			liste.add(k,i1);
+			             		}else{
+			             			Individu i2=new Individu(FALSE,TRUE);// D'autres ne seront pas vaccinés
+			             			liste.add(k,i2);
+			             		}
+			             	}
+			             	else {//On fait pareil pour initialiser les non contaminés
+			             		tab[i][j] = NonContamine;
+			             		if(x%3==0 && getVaccines()<2000) {
+				             			Individu i4=new Individu(TRUE,FALSE); //Certains des non contaminés seront vaccinés
+				             			liste.add(k,i4);
+			             		}else {
+			             			Individu i3=new Individu(FALSE,FALSE); //D'autres non vaccinés
+			             			liste.add(k,i3);
+			             		}
+			             	}
+		         }
+		         m+=99;
+		}
+		
+       }
+		
+		if(v==3) {//Premier état initial préenregistré avec 3500 contaminés et 1000 vaccinés
+			int m=0;
+			for (int i = 0;i < tab.length; i++) { //parcourt les lignes
+		         for (int j = 0;j < tab[i].length;j++) { //parcours les colonnes
+			        	 int k=i+j+m; // L'indice des éléments du tableau dans l'ArrayList Individu
+			        	 int min_val = 10;
+			             int max_val = 100;
+			             Random ran = new Random(); 
+			             int x = ran.nextInt(max_val) + min_val;//Retourne une valeur aléatoire entre 10 et 100
+			             	if(x%2==0 && getContamines()<=2000) {
+			             		tab[i][j] = Contamine;
+			             		if(x%4==0 && getVaccines()<3500) {
+				             			Individu i1=new Individu(TRUE,TRUE); //Certains des contaminés seront vaccinés
+				             			liste.add(k,i1);
+			             		}else{
+			             			Individu i2=new Individu(FALSE,TRUE);// D'autres ne seront pas vaccinés
+			             			liste.add(k,i2);
+			             		}
+			             	}
+			             	else {//On fait pareil pour initialiser les non contaminés
+			             		tab[i][j] = NonContamine;
+			             		if(x%3==0 && getVaccines()<3500) {
+				             			Individu i4=new Individu(TRUE,FALSE); //Certains des non contaminés seront vaccinés
+				             			liste.add(k,i4);
+			             		}else {
+			             			Individu i3=new Individu(FALSE,FALSE); //D'autres non vaccinés
+			             			liste.add(k,i3);
+			             		}
+			             	}
+		         }
+		         m+=99;
+		}
+		
+       }
 	}
 	
 	
@@ -318,7 +385,23 @@ public class Pandemie {
 		}
 		return com;
 	}
+	
+	public double getTauxVacCont() {
+		double a=(double) getVaccinesCont();
+		double b=(double) getVaccines();
+		double c=(a/b)*100;
 		
+		return c;
+	}
+	
+	public double getTauxNonVacCont() {
+		double a=(double) getNonVaccinesCont();
+		int t=getPopulation()-getVaccines();
+		double b=(double) t;
+		double d=(a/b)*100;
+		
+		return d;
+	}	
 		
 	public void run(int nb_tours,int delai){
 		for(int i=0;i<nb_tours;i++) {
@@ -332,12 +415,16 @@ public class Pandemie {
 			int d=getVaccinesCont();
 			int g=getNonVaccinesCont();
 			int f=i+1;
+			double h=getTauxVacCont();
+			double k=getTauxNonVacCont();
 			System.out.println("Tour "+f);
 			System.out.println("Populations : "+a);
 			System.out.println("Vaccinés : "+b);
 			System.out.println("Contaminés : "+c);
 			System.out.println("Vaccinés contaminés : "+d);
 			System.out.println("Non vaccinés contaminés : "+g);
+			System.out.println("Taux des vaccinés contaminés : "+h+" %");
+			System.out.println("Taux des non vaccinés contaminés : "+k+" %");
 			
 			try {
 				Thread.sleep(delai);
@@ -354,4 +441,3 @@ public class Pandemie {
 	}
 	
 }
-
