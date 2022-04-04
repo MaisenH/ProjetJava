@@ -402,7 +402,15 @@ public class Pandemie {
 		
 		return d;
 	}	
+	
+	public double getTauxGlobCont() {
+		double a=(double) getContamines();
+		double b=(double) getPopulation();
+		double c=(a/b)*100;
 		
+		return c;
+	}
+	
 	public void run(int nb_tours,int delai){
 		for(int i=0;i<nb_tours;i++) {
 			int cc=getContamines();
@@ -417,6 +425,7 @@ public class Pandemie {
 			int f=i+1;
 			double h=getTauxVacCont();
 			double k=getTauxNonVacCont();
+			double l=getTauxGlobCont();
 			System.out.println("Tour "+f);
 			System.out.println("Populations : "+a);
 			System.out.println("Vaccinés : "+b);
@@ -425,6 +434,7 @@ public class Pandemie {
 			System.out.println("Non vaccinés contaminés : "+g);
 			System.out.println("Taux des vaccinés contaminés : "+h+" %");
 			System.out.println("Taux des non vaccinés contaminés : "+k+" %");
+			System.out.println("Taux global de contamination : "+l+" %");
 			
 			try {
 				Thread.sleep(delai);
