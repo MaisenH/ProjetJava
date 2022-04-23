@@ -1,0 +1,16 @@
+// package Projet1; 
+
+public class Main {
+	public static void main(String[] arg) {
+		JeuDeLaVie jeu = new JeuDeLaVie("1","0",1);
+		jeu.affichTab();
+		int total_voisins_viv = jeu.total_voisins(99,2);
+		System.out.println("le nombre de voisins est "+total_voisins_viv);
+		String etat_cellule =jeu.resultat(99, 2);
+		System.out.println("le nouvel etat de la case vaut "+etat_cellule);
+		jeu.tour(); // On fait un tour 
+		jeu.affichTab(); // Permet d'afficher le nouveau tableau
+		jeu.run(10,1000); // On fait 20 tours avec un delai de 1 sec entre chaque tour
+		
+	}
+}
