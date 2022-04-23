@@ -91,7 +91,7 @@ public class Pandemie {
 		
        }
 		
-		if(v==3) {//Premier état initial préenregistré avec 3500 contaminés et 1000 vaccinés
+		if(v==3) {//Premier état initial préenregistré avec 2000 contaminés et 3500 vaccinés
 			int m=0;
 			for (int i = 0;i < tab.length; i++) { //parcourt les lignes
 		         for (int j = 0;j < tab[i].length;j++) { //parcours les colonnes
