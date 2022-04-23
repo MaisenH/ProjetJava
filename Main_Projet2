@@ -5,15 +5,6 @@ import java.util.Random;
 
 public class main {
 	public static void main(String[] arg) {
-		//JeuDeLaVie jeuDeLaVie = new JeuDeLaVie("1","0",9);
-		//jeuDeLaVie.affichTab();
-		//int t =jeuDeLaVie.total_voisins(99,2);
-		//System.out.println("le nombre de voisins est "+t);
-		//String a=jeuDeLaVie.resultat(99, 2);
-		//System.out.println("la nouvelle case vaut "+a);
-		//jeuDeLaVie.tour();
-		//jeuDeLaVie.affichTab();
-		//jeuDeLaVie.run(10,2000);
 		Pandemie pan=new Pandemie("1","0",1);
 		//pan.afficheliste();
 		
