@@ -172,12 +172,10 @@ public class JeuDeLaVie {
 			    		if(i<30 || i>98){
 				    		if(h%2==0){
 							tab[i][j]=vivant;
-				    		}
-				    		else{
+				    		}else{
 							tab[i][j]=mort;
 				    		}
-			    		}
-					else {
+			    		}else {
 						tab[i][j]=mort;
 			    		}
 				}
