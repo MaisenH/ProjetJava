@@ -1,5 +1,6 @@
-package JDL;
+package Projet1;
 import java.lang.Thread;
+import java.lang.reflect.Array;
 import java.util.Random;
 
 public class JeuDeLaVie {
@@ -16,20 +17,20 @@ public class JeuDeLaVie {
 		vivant="1";
 		mort="0";
 		tab = new String[100][100];
-		 for (int i = 0;i < tab.length; i++) {
-	         for (int j = 0;j < tab[i].length;j++) {
-	        	 int min_val = 10;
-	             int max_val = 100;
-	             Random ran = new Random();
-	             int x = ran.nextInt(max_val) + min_val;
-	             	if(x%2==0) {
-	             		tab[i][j] = vivant;
-	             	}
-	             	else {
-	             		tab[i][j] = mort;
-	             	}
-	         }
-		 }
+		for (int i = 0;i < tab.length; i++) {
+	        	for (int j = 0;j < tab.length;j++) {
+	        		int min_val = 10;
+	            		int max_val = 100;
+	            		Random ran = new Random();
+	            		int x = ran.nextInt(max_val) + min_val;
+	            		if(x%2==0) {
+	             			tab[i][j] = vivant;
+	            		}
+	            		else {
+	             			tab[i][j] = mort;
+	            		}
+	        	}
+		}
 	}
 	
 	public JeuDeLaVie(String viv,String mor, int k) {
@@ -40,38 +41,39 @@ public class JeuDeLaVie {
 		mort=mor;
 		tab = new String[100][100];
 		if(k==1) {
-			 for (int i = 0;i < tab.length; i++) {
-		         for (int j = 0;j < tab[i].length;j++) {
-		        	 int min_val = 10;
-		             int max_val = 100;
-		             Random ran = new Random();
-		             int x = ran.nextInt(max_val) + min_val; //x est un nombre aléatoire compris entre 10 et 100
-		             	if(x%2==0) {
-		             		tab[i][j] = vivant;
-		             	}
-		             	else {
-		             		tab[i][j] = mort;
-		             	}
-		         }
-			 }
+			for (int i = 0;i < tab.length; i++) {
+		        	for (int j = 0;j < tab[i].length;j++) {
+		        		int min_val = 10;
+		            		int max_val = 100;
+		            		Random ran = new Random();
+		            		int x = ran.nextInt(max_val) + min_val; //x est un nombre aléatoire compris entre 10 et 100
+		            		if(x%2==0) {
+		             			tab[i][j] = vivant;
+		            		}
+		           		else {
+		             			tab[i][j] = mort;
+		            		}
+		        	}
+			}
 		}
 		if(k==2) {
 			for (int i = 0;i < tab.length; i++) {
-		         for (int j = 0;j < tab[i].length;j++) {
+		        	for (int j = 0;j < tab[i].length;j++) {
 		        	 	if(j>i) {
-		             		tab[i][j] = vivant;
-		        	 	}else {
+		             			tab[i][j] = vivant;
+		        	 	}
+					else {
 		        	 		tab[i][j] = mort;
 		        	 	}
-		         }
+		       		}
 			}
 		}
 		if(k==3) {
 			for (int i = 0;i < tab.length; i++) {
-		         for (int j = 0;j < tab[i].length;j++) {
-		        	 	tab[i][j]=mort;
-		        	 	}
-		         }
+		        	for (int j = 0;j < tab[i].length;j++) {
+		        		tab[i][j]=mort;
+		        	}
+		        }
 			tab[49][49]=vivant;
 			tab[49][50]=vivant;
 			tab[50][49]=vivant;
@@ -79,124 +81,125 @@ public class JeuDeLaVie {
 		}
 		if(k==4) {
 			for (int i = 0;i < tab.length; i++) {
-		         for (int j = 0;j < tab[i].length;j++) {
-		        	 int h=i+j;
-		        	 if(h%2==0) {
-		        	 	tab[i][j]=vivant;
-		        	 }
-		        	 else {
-		        		 tab[i][j]=mort;
-		        	 }
-		         }
+		        	for (int j = 0;j < tab[i].length;j++) {
+		        		int h=i+j;
+		        		if(h%2==0) {
+		        	 		tab[i][j]=vivant;
+		        		}
+		        	 	else {
+		        			tab[i][j]=mort;
+		        		}
+		        	}
 			}
 		}
 		if(k==5) {
 			for (int i = 0;i < tab.length; i++) {
-		         for (int j = 0;j < tab[i].length;j++) {
-		        	 int h=i+j;
+		        	for (int j = 0;j < tab[i].length;j++) {
+		        		int h=i+j;
 		        	 	if(i<20 || i>80) {
-			        	 if(h%2==0) {
-			        	 	tab[i][j]=vivant;
-			        	 }
-			        	 else {
-			        		 tab[i][j]=mort;
-			        	 }
-		        	 	}else {
+			        		if(h%2==0) {
+			        	 		tab[i][j]=vivant;
+			        	    	}
+			        		else {
+			        			tab[i][j]=mort;
+			        		}
+		        	 	}
+					else {
 		        	 		tab[i][j]=mort;
 		        	 	}
 		         	}
-				}
 			}
-		if(k==7) {
-            for (int i = 0;i < tab.length; i++) {
-                for (int j = 0;j < tab[i].length;j++) {
-                    int h=i+j;
-                    if(j<20 || j>80) {
-                        if(h%2==0) {
-                            tab[i][j]=vivant;
-                        }
-                        else {
-                            tab[i][j]=mort;
-                        }
-                    }else {
-                        tab[i][j]=vivant;
-                    }
-                }
-            }
-        }
-
-        if(k==6) {
-            for (int i = 0;i < tab.length; i++) {
-                for (int j = 0;j < tab[i].length;j++) {
-                    int h=i+j;
-                    if(i<20 || i>80) {
-                        if(h%2==0) {
-                            tab[i][j]=mort;
-                        }
-                        else {
-                            tab[i][j]=vivant;
-                        }
-                    }else {
-                        tab[i][j]=vivant;
-                    }
-                }
-            }
-        }
-        if(k==8) {
-            for (int i = 0;i < tab.length; i++) {
-                for (int j = 0;j < tab[i].length;j++) {
-                    int p=i*j;
-                    if(i<10 || i>90)
-                        if(p%2==0) {
-                            tab[i][j]=vivant;
-                        }
-                        else {
-                            tab[i][j]=mort;
-                        }
-                    else {
-                        tab[i][j]=vivant;
-                    }
-                }
-             }
-        }
-
-        if(k==9){
-            for(int i = 0; i< tab.length; i++){
-                for(int j = 0; j<tab[i].length; j++){
-                    int h = i+j;
-                    if(i<30 || i>98){
-	                    if(h%2==0){
-	                        tab[i][j]=vivant;
-	                    }
-	                    else{
-	                        tab[i][j]=mort;
-	                    }
-                    }else {
-                    	tab[i][j]=mort;
-                    }
-                }
-            }
-        }
- 
-
 		}
-	
-	
+		if(k==7) {
+           		for (int i = 0;i < tab.length; i++) {
+                		for (int j = 0;j < tab[i].length;j++) {
+					int h=i+j;
+				    	if(j<20 || j>80) {
+						if(h%2==0) {
+                            				tab[i][j]=vivant;
+                        			}
+                       				else {
+                            				tab[i][j]=mort;
+                        			}
+                    			}
+					else {
+                        			tab[i][j]=vivant;
+                    			}
+                		}
+            		}
+        	}
+
+		if(k==6) {
+			for (int i = 0;i < tab.length; i++) {
+				for (int j = 0;j < tab[i].length;j++) {
+			    		int h=i+j;
+			    		if(i<20 || i>80) {
+						if(h%2==0) {
+				    			tab[i][j]=mort;
+						}
+						else {
+				    			tab[i][j]=vivant;
+						}
+			   		}
+					else {
+						tab[i][j]=vivant;
+			    		}
+				}
+		    	}
+		}
+		if(k==8) {
+			for (int i = 0;i < tab.length; i++) {
+				for (int j = 0;j < tab[i].length;j++) {
+			    		int p=i*j;
+			    		if(i<10 || i>90)
+						if(p%2==0) {
+				    			tab[i][j]=vivant;
+						}
+						else {
+				    			tab[i][j]=mort;
+						}
+			    		else {
+						tab[i][j]=vivant;
+			    		}
+				}
+		    	}
+		}
+
+		if(k==9){
+			for(int i = 0; i< tab.length; i++){
+				for(int j = 0; j<tab[i].length; j++){
+			    		int h = i+j;
+			    		if(i<30 || i>98){
+				    		if(h%2==0){
+							tab[i][j]=vivant;
+				    		}
+				    		else{
+							tab[i][j]=mort;
+				    		}
+			    		}
+					else {
+						tab[i][j]=mort;
+			    		}
+				}
+		    	}
+		}
+	}
+
+
 	
 	public void affichTab() {
 	/*Permet d'fficher le tableau tab*/
 		for (int i = 0;i < tab.length; i++) { // On parcourt le tableau ligne et colonne
-	         for (int j = 0;j < tab[i].length;j++) {
-	        	 System.out.print(tab[i][j] + " "); //On met un espace pour que l'affichage soit correct
-	         }
-	         System.out.println();
-	      }
+	        	for (int j = 0;j < tab[i].length;j++) {
+	        		System.out.print(tab[i][j] + " "); //On met un espace pour que l'affichage soit correct
+	        	}
+	        System.out.println();
+	    	}
 	}
 		
 	
 	public int valeur_case(int i, int j) {
 	/*Retourne la valeur (l'état de la cellule) de la case d'indice i,j*/
-		
 		if(tab[i][j]==vivant) {
 			return 1;
 		}
@@ -207,7 +210,6 @@ public class JeuDeLaVie {
 	/*Calcule pour une cellule d'indice i et j, la somme totale des valeurs des cellules voisines 
 	Cette méthode sera utile pour savoir si la cellule reste vivante ou meurt*/
 		int somme=0;
-		
 		//Pour tous les cas de i (ligne)
 		if(i==0){
 			if(j==0) {//En haut à gauche
@@ -249,7 +251,7 @@ public class JeuDeLaVie {
 	/* Méthode qui renvoie le nouvel état de la cellule d'indice i,j.
 	Si une cellule vivante a plus de 3 cellules vivantes autour d'elles, elle reste vivante (return 1 sinon return 0)
 	Si une cellule morte est entouré par plus de 3 cellules vivantes elle devient vivante*/
-		if( total_voisins(i,j)>=3) { // Si la 
+		if( total_voisins(i,j)>=3) {  
 			return vivant;
 		}
 		return mort; // dans le cas ou on a pas plus de 3 voisins vivants
@@ -260,9 +262,9 @@ public class JeuDeLaVie {
 	la méthode résultat a chaque cellule). Renvoie le nouveau tableau avec le nouvel etat des cellules */
 		String[][] tabb=new String[100][100]; // on crée un nouveau tableau qui remplacera l'ancien
 		for (int i = 0;i < tab.length; i++) {
-	         for (int j = 0;j < tab[i].length;j++) {
+	        	for (int j = 0;j < tab[i].length;j++) {
 	        		 tabb[i][j] = resultat(i,j);
-	      }
+	      		}
 		}
 		return tabb;
 	}
@@ -273,10 +275,10 @@ public class JeuDeLaVie {
 		int count=0;
 		for (int i = 0;i < tab.length; i++) {
 	        	for (int j = 0;j < tab[i].length;j++) {
-	        		 if(valeur_case(i,j)==1) {
-	        			 count+=1;
-	        		 }
-	         	}
+	        		if(valeur_case(i,j)==1) {
+	        			count+=1;
+	        		}
+	        	}
 		}
 		return count;
 	}
@@ -286,11 +288,11 @@ public class JeuDeLaVie {
 	/*Renvoie le nombre total de cellule vivante dans le tableau*/
 		int count=0;
 		for (int i = 0;i < tab.length; i++) {
-		        for (int j = 0;j < tab[i].length;j++) {
-		        	if(valeur_case(i,j)==0) {
-		        		count+=1;
-		        	}
+		    for (int j = 0;j < tab[i].length;j++) {
+		    	if(valeur_case(i,j)==0) {
+		        	count+=1;
 		        }
+		    }
 		}
 		return count;
 	}
@@ -325,6 +327,5 @@ public class JeuDeLaVie {
 		}
 		System.out.println("Fin");
 	}
-	
 }
 
