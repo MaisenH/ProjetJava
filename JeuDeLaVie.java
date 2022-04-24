@@ -267,6 +267,15 @@ public class JeuDeLaVie {
 		return tabb;
 	}
 	
+	public int getDelai() {
+	/*retourne le delai choisi par l'utilisateur*/
+		return delai;
+	}
+
+	public String[][] getTab() {
+	/*retourne le tableau et permet de le recuperer*/
+		return tab;
+	}
 	
 	public int getNbVivants() {
 	/*Renvoie le nombre total de cellule vivante dans le tableau*/
