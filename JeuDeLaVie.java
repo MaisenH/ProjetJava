@@ -110,7 +110,7 @@ public class JeuDeLaVie {
 		         	}
 			}
 		}
-		if(k==7) {
+		if(k==6) {
            		for (int i = 0;i < tab.length; i++) {
                 		for (int j = 0;j < tab[i].length;j++) {
 					int h=i+j;
@@ -129,7 +129,7 @@ public class JeuDeLaVie {
             		}
         	}
 
-		if(k==6) {
+		if(k==7) {
 			for (int i = 0;i < tab.length; i++) {
 				for (int j = 0;j < tab[i].length;j++) {
 			    		int h=i+j;
