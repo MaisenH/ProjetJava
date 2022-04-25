@@ -8,6 +8,7 @@ Le projet 2, très similaire au premier, vise à représenter des individus selo
 Il contient les éléments suivants pour le projet 1 :
     -JeuDeLaVie
     -MainProjet1
+    -test3
     
 Et pour le projet 2: 
     -Pandemie
