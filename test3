@@ -1,0 +1,112 @@
+package Rendu_projet.Projet1;
+
+import javax.swing.*;
+import java.awt.*;
+
+class ComponentTest extends JPanel
+{
+    static final long serialVersionUID =1;
+    JeuDeLaVie jeuDeLaVie;
+    ComponentTest(JeuDeLaVie jeu)
+    {
+        this.jeuDeLaVie = jeu;
+    }
+    public void dessiner(Graphics g)
+    {
+        for (int i = 0;i < jeuDeLaVie.tab.length; i++)
+        {
+            for (int j = 0;j < jeuDeLaVie.tab[i].length;j++)
+            {
+                if(jeuDeLaVie.getTab()[i][j] == "1")
+                {
+                    g.setColor(Color.blue);
+                }
+                else
+                {
+                    g.setColor(Color.red);
+                }
+                g.fillRect(i*6,j*6, 6, 6);
+            }
+        }
+    }
+
+    public void paint(Graphics g)
+    {
+        dessiner(g);
+    }
+
+}
+/*
+class Boutons extends JPanel implements ActionListener
+{
+    private JButton trace = new JButton("PLAY");
+    private JButton efface = new JButton("Effacer");
+    private ComponentTest ardoise = new ComponentTest();
+
+    public Boutons()
+    {
+        setLayout(new BorderLayout(5,5));
+        JPanel lesBoutons = new JPanel();
+        lesBoutons.add(trace);
+        lesBoutons.add(efface);
+        add(lesBoutons,BorderLayout.NORTH);
+        add(ardoise,BorderLayout.CENTER);
+        //trace.addActionListener(this);
+        //efface.addActionListener(this);
+
+    }
+
+    public void actionPerformed(ActionEvent event)
+    {
+        if(event.getSource()==trace)ardoise.setPossedeDisque(true);
+        else if (event.getSource()==efface)ardoise.setPossedeDisque(false);
+        ardoise.repaint();
+    }
+}
+*/
+public class test3 extends JFrame
+{
+    // Définissez le frame
+    //JFrame frame = new JFrame("Hello World");
+
+    //JLabel label = new JLabel("Bienvenue");
+    //frame.add(label);
+    public test3(JeuDeLaVie jeuDeLaVie)
+    {
+        ComponentTest cases = new ComponentTest(jeuDeLaVie);
+        // Définissez le panel
+        /*
+        JPanel panel = new JPanel();
+        // Définir les boutons
+        //JButton play = new JButton("PLAY");
+
+        JButton exit = new JButton("EXIT");
+        // Ajouter les boutons au frame
+        //panel.add(play);
+        panel.add(exit);
+        //ajoute l'action au bouton 2
+
+        exit.addActionListener(e -> {
+            this.dispose();
+        });
+     //ajout du Component
+     // Ajouter label et panel au frame
+        //this.setLayout(new GridLayout(2, 1));
+       // this.add(label, BorderLayout.NORTH);
+
+        this.add(panel, BorderLayout.SOUTH);
+        */
+
+        //this.setContentPane(new Boutons());
+        this.add(cases, BorderLayout.CENTER);
+        this.setLocation(400,300);
+        this.pack();
+        this.setSize(500, 500);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setVisible(true);
+    }
+    /*public static void main(String[] args)
+    {
+       new test3();
+    }*/
+}
