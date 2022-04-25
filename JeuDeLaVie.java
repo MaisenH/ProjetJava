@@ -310,10 +310,11 @@ public class JeuDeLaVie {
 	choisi entre chaque tour et renvoie l'etat final du tableau.
 	Renvoie aussi un tableau récapitulatif (nombre de mort, vivant, nombre de tour effectué)
 	Arret losrqu'aucun changement n'est détecté entre deux tours*/
-		
+		test3 test3 = new test3(this);
 		for(int i=0;i<nb_tours;i++) {// boucle qui va jusqu'au nombre de tour indiqué par l'utilisateur
 			int nb_mort_ini=getNbmorts(); // nombre de mort dans le tableau initiale
 			tab=tour(); // On recupere le tableau apres un tour dans tab
+			test3.repaint();
 			affichTab(); // On l'affiche
 			int nb_viv=getNbVivants();
 			int nb_mort=getNbmorts();
